@@ -1,18 +1,14 @@
-UNARY_OP_ADD = 'UN_ADD'
-UNARY_OP_SUB = 'UN_SUB'
+NEGATION_SIGN = 'n'
 
 def solveEquation(equ):
     equStack = []
 
     result = 0
 
-    if equ[0] == '-' or equ[0] == '+':
+    if equ[0] == '-':
         operand = equ[1:]
         equStack.append(int(operand))
-        if (equ[0] == '-'):
-            equStack.append(UNARY_OP_SUB)
-        elif equ[0] == '+':
-            equStack.append(UNARY_OP_ADD)
+        equStack.append(NEGATION_SIGN)
     else:
         count = 0
         for i in equ:
@@ -42,12 +38,9 @@ def calculate(stack):
 
     temp = tempStack.pop()
     
-    if (temp == UNARY_OP_SUB):
+    if (temp == NEGATION_SIGN):
         operand = tempStack.pop()
         return (operand * -1)
-    elif (temp == UNARY_OP_ADD):
-        operand = tempStack.pop()
-        return (operand)
     else:
         firstOp = tempStack.pop()
         secondOp = tempStack.pop()
@@ -56,12 +49,17 @@ def calculate(stack):
             return (firstOp + secondOp)
         elif temp == '-':
             return (firstOp - secondOp)
+        elif temp == '*':
+            return (firstOp * secondOp)
+        elif temp == '/':
+            if (secondOp == 0):
+                return 'undefined'
+            else:
+                return (firstOp / secondOp)
 
 def main():
     while(True):
-        raw_equ = input("Please enter an equation and I will provide an answer (or enter 'quit' to exit):\n")
-        equ = raw_equ.replace(" ", "")
-        print(equ)
+        equ = input("Please enter an equation and I will provide an answer (or enter 'quit' to exit):\n")    
         
         if(equ == 'quit'):
             print("\n\nQuitting...")
