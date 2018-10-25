@@ -56,6 +56,13 @@ def calculate(stack):
             return (firstOp + secondOp)
         elif temp == '-':
             return (firstOp - secondOp)
+        elif temp == '*':
+            return (firstOp * secondOp)
+        elif temp == '/':
+            if (secondOp == 0):
+                return 'undefined'
+            else:
+                return round(firstOp / secondOp)
 
 def main():
     while(True):
