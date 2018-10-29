@@ -1,0 +1,5 @@
+In the case of missing parenthesis:
+
+-If the right parenthesis is missing, the left parenthesis will end up attempting to make its way to the final postfix list. If we detect this, throw an error.
+
+-If the left parenthesis is missing, hitting a right parenthesis should cause the operator stack to unravel (pop elements) until the left parenthesis is found. A flag will be set if it is found. However, if the left parenthesis is never found and the operator stack is empty after popping all the operators, we should throw an error.
